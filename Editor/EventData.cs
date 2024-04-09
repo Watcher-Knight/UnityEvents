@@ -66,7 +66,7 @@ public class EventData
 
     public static void DeleteTag(string name)
     {
-        Instance.Tags = Instance.Tags.Remove(tag => tag.Name == name).ToList();
+        Instance.Tags = Instance.Tags.Where(tag => tag.Name != name).ToList();
         SaveData();
     }
 

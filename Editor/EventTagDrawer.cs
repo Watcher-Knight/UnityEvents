@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 [CustomPropertyDrawer(typeof(EventTag))]
     public class EventTagDrawer : PropertyDrawer
@@ -16,12 +17,12 @@ using UnityEditor;
             
             int index = 0;
             if (tags.Any(tag => tag.Id == idProperty.intValue))
-                index = tags.IndexOf(tag => tag.Id == idProperty.intValue);
+                index = tags.TakeWhile(tag => tag.Id != idProperty.intValue).Count();
             else
             {
                 EditorEventTag notSetOption = new("Undefined", idProperty.intValue);
                 tags = tags.Append(notSetOption).ToArray();
-                index = tags.IndexOf(notSetOption);
+                index = Array.IndexOf(tags.ToArray(), notSetOption);
             }
             
             string[] tagOptions = tags.Select(tag => tag.Name).ToArray();
