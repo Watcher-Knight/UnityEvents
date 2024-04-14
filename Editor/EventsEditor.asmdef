@@ -2,7 +2,7 @@
     "name": "EventsEditor",
     "rootNamespace": "",
     "references": [
-        "GUID:737e7663002eeb24a97cf3ce5ad6adeb"
+        "Events"
     ],
     "includePlatforms": [
         "Editor"
