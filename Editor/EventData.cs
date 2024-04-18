@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using UnityEngine;
+using System;
 
 public class EventData
 {
@@ -77,5 +78,17 @@ public class EventData
             Instance.Tags[index] = new(name, Instance.Tags[index].Id);
             SaveData();
         }
+    }
+
+    public static void MoveTag(int id, int amount)
+    {
+        EditorEventTag tag = Instance.Tags.Find(tag => tag.Id == id);
+        int index = Instance.Tags.FindIndex(tag => tag.Id == id);
+        Instance.Tags.RemoveAt(index);
+
+        int newIndex = Math.Clamp(index + amount, 0, Instance.Tags.Count);
+        Instance.Tags.Insert(newIndex, tag);
+
+        SaveData();
     }
 }
