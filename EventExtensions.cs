@@ -9,6 +9,8 @@ public static class EventExtensions
     }
     public static void SendMessage<T>(this GameObject gameObject, EventTag tag, T arg)
     {
+        gameObject.SendMessage(tag);
+        
         IEventListener<T>[] listeners = gameObject.GetComponents<IEventListener<T>>();
         foreach (IEventListener<T> listener in listeners) listener.Invoke(tag, arg);
     }
